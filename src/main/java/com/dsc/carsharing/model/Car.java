@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
@@ -19,5 +20,8 @@ public class Car {
     private String model;
 
     private Integer seats;
+
+    @ManyToOne
+    private Parent parent;
 
 }

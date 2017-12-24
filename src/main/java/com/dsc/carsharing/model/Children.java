@@ -19,13 +19,7 @@ public class Children {
 
     private String lastName;
 
-    @ManyToMany
-    @JoinTable(
-            name = "parents_children",
-            joinColumns = @JoinColumn(
-                    name = "children_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "parent_id", referencedColumnName = "id"))
+    @ManyToMany(mappedBy = "children")
     private List<Parent> parents;
 
     @ManyToOne

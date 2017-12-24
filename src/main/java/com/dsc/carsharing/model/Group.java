@@ -3,15 +3,13 @@ package com.dsc.carsharing.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "scout_group")
 public class Group {
 
     @Id

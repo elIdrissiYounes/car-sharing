@@ -3,8 +3,7 @@ package com.dsc.carsharing.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
@@ -20,7 +19,15 @@ public class Parent extends User {
 
     private String email;
 
-    @ManyToOne
+    @ManyToMany
+    @JoinTable(
+            name = "parent_children",
+            joinColumns = @JoinColumn(name = "parent_id"),
+            inverseJoinColumns = @JoinColumn(name = "children_id")
+    )
+    private List<Children> children;
+
+    @OneToMany(mappedBy = "parent")
     private List<Car> cars;
 
 }

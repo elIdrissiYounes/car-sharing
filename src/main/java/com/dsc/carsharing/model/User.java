@@ -5,9 +5,11 @@ import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 @Getter
 @Setter
+@MappedSuperclass
 public abstract class User {
 
     @Id
@@ -17,5 +19,7 @@ public abstract class User {
     private String username;
 
     private String password;
+
+    private Boolean enabled;
 
 }

@@ -24,11 +24,10 @@ public class Excursion {
 
     @ManyToMany
     @JoinTable(
-            name = "excursions_groups",
-            joinColumns = @JoinColumn(
-                    name = "excursion_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "group_id", referencedColumnName = "id"))
+            name = "excursion_group",
+            joinColumns = @JoinColumn(name = "excursion_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id")
+    )
     private List<Group> groups;
 
 }

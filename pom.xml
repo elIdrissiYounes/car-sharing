@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>carsharing</name>
-	<description>Car sharing application</description>
+	<description>Car-sharing application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

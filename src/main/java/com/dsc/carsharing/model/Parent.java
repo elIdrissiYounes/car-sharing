@@ -9,15 +9,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@DiscriminatorValue("P")
 public class Parent extends User {
 
-    private String firstName;
-
-    private String lastName;
-
     private String gender;
-
-    private String email;
 
     @ManyToMany
     @JoinTable(

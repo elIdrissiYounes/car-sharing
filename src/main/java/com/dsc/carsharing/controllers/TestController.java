@@ -10,6 +10,6 @@ public class TestController {
     @GetMapping("/")
     public String helloWorld(Model model) {
         model.addAttribute("hello", "hello");
-        return "hello";
+        return "index";
     }
 }

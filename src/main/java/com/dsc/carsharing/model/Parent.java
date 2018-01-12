@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("P")
+@DiscriminatorValue("PARENT")
 public class Parent extends User {
 
     private String gender;

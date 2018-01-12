@@ -23,3 +23,7 @@ body {
 .error-actions .btn {
     margin-right: 10px;
 }
+
+.list-controls {
+    margin-bottom: 15px;
+}

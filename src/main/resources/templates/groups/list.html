@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header-css">
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"></div>
+
+<div class="container">
+    <div class="list-controls" sec:authorize="hasAnyAuthority('ADMIN')">
+        <a th:href="@{/groups/new}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"></span>
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th th:text="#{cc.rowNbr}"></th>
+                <th th:text="#{groups.name}"></th>
+                <th th:text="#{cc.actions}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="group,iter : ${groups}">
+                <td th:text="${iter.index+1}">N/A</td>
+                <td th:text="${group.name}">N/A</td>
+                <td class="actions-col">
+                    <span sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{/groups/edit/__${group.id}__}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.edit}"></span>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

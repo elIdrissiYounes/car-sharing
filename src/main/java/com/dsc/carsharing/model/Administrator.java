@@ -9,6 +9,6 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Entity
-@DiscriminatorValue("A")
+@DiscriminatorValue("ADMIN")
 public class Administrator extends User {
 }

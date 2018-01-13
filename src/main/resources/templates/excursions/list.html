@@ -19,7 +19,8 @@
             <tr>
                 <th th:text="#{cc.rowNbr}"></th>
                 <th th:text="#{excursions.destination}"></th>
-                <th th:text="#{excursions.date}"></th>
+                <th th:text="#{excursions.startDate}"></th>
+                <th th:text="#{excursions.endDate}"></th>
                 <th th:text="#{excursions.description}"></th>
                 <th th:text="#{cc.actions}"></th>
 
@@ -29,7 +30,8 @@
             <tr th:each="excursion,iter : ${excursions}">
                 <td th:text="${iter.index+1}">N/A</td>
                 <td th:text="${excursion.destination}">N/A</td>
-                <td th:text="${excursion.date}">N/A</td>
+                <td th:text="${excursion.startDate}">N/A</td>
+                <td th:text="${excursion.endDate}">N/A</td>
                 <td th:text="${excursion.description}">N/A</td>
                 <td class="actions-col">
                     <span sec:authorize="hasAnyAuthority('ADMIN')">

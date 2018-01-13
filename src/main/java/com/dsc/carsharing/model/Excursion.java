@@ -22,7 +22,9 @@ public class Excursion {
     private String description;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    private Date startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endDate;
 
     @ManyToMany
     @JoinTable(

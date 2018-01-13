@@ -1,4 +1,4 @@
-package com.dsc.carsharing.config;
+package templates.error;
 
 import com.dsc.carsharing.model.Administrator;
 import com.dsc.carsharing.repositories.AdministratorRepository;

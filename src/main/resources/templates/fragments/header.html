@@ -31,6 +31,9 @@
                     <li sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/excursions}" th:text="#{excursions.title}"></a>
                     </li>
+                    <li sec:authorize="hasAnyAuthority('ADMIN','User')">
+                        <a th:href="@{/proposals}" th:text="#{proposals.title}"></a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" th:text="#{cc.login}"></a></li>

@@ -1,8 +1,10 @@
 package com.dsc.carsharing.config;
 
 import com.dsc.carsharing.model.Administrator;
+import com.dsc.carsharing.model.Parent;
 import com.dsc.carsharing.model.User;
 import com.dsc.carsharing.repositories.AdministratorRepository;
+import com.dsc.carsharing.repositories.ParentRepository;
 import com.dsc.carsharing.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -20,19 +22,16 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private AdministratorRepository administratorRepository;
     @Autowired
-    private UserRepository userRepository;
+    private ParentRepository parentRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public void onApplicationEvent(final ContextRefreshedEvent event) {
-        System.out.println("okok");
         if (alreadySetup) {
-            System.out.println("vu");
             return;
         }
-        System.out.println("dada");
         createAdmin();
         createUser();
         alreadySetup = true;
@@ -55,16 +54,16 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private void createUser() {
         String username = "toto";
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            user = new User();
-            user.setFirstName("toto");
-            user.setLastName("toto");
-            user.setEmail("toto@carsharing.com");
-            user.setUsername(username);
-            user.setEnabled(true);
-            user.setPassword(passwordEncoder.encode("toto"));
-            userRepository.save(user);
+        Parent parent = parentRepository.findByUsername(username);
+        if (parent == null) {
+            parent = new Parent();
+            parent.setFirstName("toto");
+            parent.setLastName("toto");
+            parent.setEmail("toto@carsharing.com");
+            parent.setUsername(username);
+            parent.setEnabled(true);
+            parent.setPassword(passwordEncoder.encode("toto"));
+            parentRepository.save(parent);
         }
     }
 

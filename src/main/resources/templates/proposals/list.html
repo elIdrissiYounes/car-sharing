@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header-css">
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"></div>
+
+<div class="container">
+    <div class="list-controls" sec:authorize="hasAnyAuthority('ADMIN','User','PARENT')">
+        <a th:href="@{/proposals/new}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"></span>
+        </a>
+    </div>
+    <div class="list-controls" sec:authorize="hasAnyAuthority('ADMIN','User','PARENT')">
+        <a th:href="@{/proposals/newCar}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"> car</span>
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th th:text="#{cc.rowNbr}"></th>
+                <th th:text="#{proposals.title}"></th>
+                <th th:text="#{proposals.excursions}"></th>
+                <th th:text="#{proposals.place}"></th>
+                <th th:text="#{proposals.car}"></th>
+                <th th:text="#{cc.actions}"></th>
+
+            </tr>
+            </thead>
+            <!--<tbody>
+            <tr th:each="excursion,iter : ${excursions}">
+                <td th:text="${iter.index+1}">N/A</td>
+                <td th:text="${excursion.destination}">N/A</td>
+                <td th:text="${excursion.startDate}">N/A</td>
+                <td th:text="${excursion.endDate}">N/A</td>
+                <td th:text="${excursion.description}">N/A</td>
+                <td class="actions-col">
+                    <span sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{/excursions/edit/__${excursion.id}__}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.edit}"></span>
+                        </a>
+                        <a th:href="@{/excursions/edit/__${excursion.id}__}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-plus"></span> <span
+                                th:text="#{excursions.add.groups}"></span>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+            -->
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

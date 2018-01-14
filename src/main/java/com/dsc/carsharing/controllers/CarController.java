@@ -34,7 +34,6 @@ public class CarController {
     }
     @PostMapping("save")
     public String save(Car car, Principal principal) {
-        System.out.println(principal);
         Parent parent = parentRepository.findByUsername(principal.getName());
         car.setParent(parent);
         carRepository.save(car);

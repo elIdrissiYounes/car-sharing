@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Inheritance
-@DiscriminatorColumn(name="user_type",
+@DiscriminatorColumn(name = "user_type",
         discriminatorType = DiscriminatorType.STRING)
 public class User {
 
@@ -23,10 +23,11 @@ public class User {
 
     private String email;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    private Boolean enabled;
+    private boolean enabled = true;
 
 }

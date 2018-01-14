@@ -26,12 +26,15 @@
             <div class="collapse navbar-collapse" id="app-navbar">
                 <ul class="nav navbar-nav">
                     <li sec:authorize="hasAnyAuthority('ADMIN')">
+                        <a th:href="@{/parents}" th:text="#{parents.title}"></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/groups}" th:text="#{groups.title}"></a>
                     </li>
                     <li sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/excursions}" th:text="#{excursions.title}"></a>
                     </li>
-                    <li sec:authorize="hasAnyAuthority('ADMIN','User','PARENT')">
+                    <li sec:authorize="hasAnyAuthority('ADMIN','PARENT')">
                         <a th:href="@{/proposals}" th:text="#{proposals.title}"></a>
                     </li>
                 </ul>

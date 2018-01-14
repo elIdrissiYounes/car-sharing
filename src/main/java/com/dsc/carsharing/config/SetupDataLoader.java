@@ -2,10 +2,8 @@ package com.dsc.carsharing.config;
 
 import com.dsc.carsharing.model.Administrator;
 import com.dsc.carsharing.model.Parent;
-import com.dsc.carsharing.model.User;
 import com.dsc.carsharing.repositories.AdministratorRepository;
 import com.dsc.carsharing.repositories.ParentRepository;
-import com.dsc.carsharing.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

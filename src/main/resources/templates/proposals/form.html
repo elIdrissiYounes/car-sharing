@@ -26,6 +26,7 @@
                     <label for="excursion" class="col-sm-2 control-label" th:text="#{proposals.excursion}"></label>
                     <div class="col-sm-10">
                         <select id="excursion" class="form-control" th:field="*{excursion.id}" required="required">
+                            <option value="" th:text="#{cc.select}" selected="selected"></option>
                             <option th:each="excursion : ${excursions}" th:value="${excursion.id}"
                                     th:text="${excursion.destination}"></option>
                         </select>
@@ -35,6 +36,7 @@
                     <label for="car" class="col-sm-2 control-label" th:text="#{proposals.car}"></label>
                     <div class="col-sm-10">
                         <select id="car" class="form-control" th:field="*{car.id}" required="required">
+                            <option value="" th:text="#{cc.select}" selected="selected"></option>
                             <option th:each="car : ${cars}" th:value="${car.id}"
                                     th:text="${car.model}"></option>
                         </select>

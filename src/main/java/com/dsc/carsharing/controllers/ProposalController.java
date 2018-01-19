@@ -46,6 +46,8 @@ public class ProposalController {
     public String create(Model model, Principal principal) {
         List<Excursion> excursions = excursionRepository.findAll();
         Parent parent = parentRepository.findByUsername(principal.getName());
+        // TODO: Show just his/her children groups excursions
+        // TODO: Indicate what children are already in the car, his at least
         model.addAttribute("excursions", excursions);
         model.addAttribute("cars", parent.getCars());
         model.addAttribute("proposal", new Proposal());
@@ -61,5 +63,18 @@ public class ProposalController {
         return "redirect:/proposals";
     }
 
+    @GetMapping("proposals")
+    public String showProposals(Model model) {
+        // TODO: Excursions of his children
+        List<Excursion> excursions = excursionRepository.findAll();
+        model.addAttribute("excursions", excursions);
+        return "proposals/proposals";
+    }
+
+    @GetMapping("select/{id}")
+    public String selectProposal(@PathVariable Long id, Model model) {
+//        model.addAttribute("excursions", excursions);
+        return "proposals/select";
+    }
 
 }

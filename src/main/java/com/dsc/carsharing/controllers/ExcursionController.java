@@ -36,6 +36,7 @@ public class ExcursionController {
     @GetMapping("new")
     public String create(Model model) {
         model.addAttribute("excursion", new Excursion());
+        // TODO: Add groups to excursions during creation
         return "excursions/form";
     }
 

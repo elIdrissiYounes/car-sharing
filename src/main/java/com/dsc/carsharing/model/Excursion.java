@@ -23,6 +23,7 @@ public class Excursion {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
@@ -33,5 +34,8 @@ public class Excursion {
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
     private List<Group> groups;
+
+    @OneToMany(mappedBy = "excursion")
+    private List<Proposal> proposals;
 
 }

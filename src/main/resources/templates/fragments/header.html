@@ -34,7 +34,13 @@
                     <li sec:authorize="hasAnyAuthority('ADMIN')">
                         <a th:href="@{/excursions}" th:text="#{excursions.title}"></a>
                     </li>
-                    <li sec:authorize="hasAnyAuthority('ADMIN','PARENT')">
+                    <li sec:authorize="hasAnyAuthority('PARENT')">
+                        <a th:href="@{/children}" th:text="#{children.title}"></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('PARENT')">
+                        <a th:href="@{/cars}" th:text="#{cars.title}"></a>
+                    </li>
+                    <li sec:authorize="hasAnyAuthority('PARENT')">
                         <a th:href="@{/proposals}" th:text="#{proposals.title}"></a>
                     </li>
                 </ul>

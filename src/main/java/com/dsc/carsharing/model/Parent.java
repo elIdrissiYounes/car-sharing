@@ -14,7 +14,7 @@ public class Parent extends User {
 
     private String gender;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "parent_children",
             joinColumns = @JoinColumn(name = "parent_id"),

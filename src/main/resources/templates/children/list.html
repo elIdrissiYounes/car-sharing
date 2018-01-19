@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/header :: header-css">
+</head>
+<body>
+
+<div th:replace="fragments/header :: menu"></div>
+
+<div class="container">
+    <div class="list-controls" sec:authorize="hasAnyAuthority('PARENT')">
+        <a th:href="@{/children/new}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"></span>
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th th:text="#{cc.rowNbr}"></th>
+                <th th:text="#{children.name.first}"></th>
+                <th th:text="#{children.name.last}"></th>
+                <th th:text="#{children.group}"></th>
+                <th th:text="#{cc.actions}"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="child,iter : ${children}">
+                <td th:text="${iter.index+1}">N/A</td>
+                <td th:text="${child.firstName}">N/A</td>
+                <td th:text="${child.lastName}">N/A</td>
+                <td th:text="${child.group.name}">N/A</td>
+                <td class="actions-col">
+                    <span sec:authorize="hasAnyAuthority('PARENT')">
+                        <a th:href="@{/children/edit/__${child.id}__}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.edit}"></span>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

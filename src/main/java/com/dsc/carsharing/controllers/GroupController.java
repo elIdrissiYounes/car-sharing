@@ -36,6 +36,7 @@ public class GroupController {
     @GetMapping("new")
     public String create(Model model) {
         model.addAttribute("group", new Group());
+        model.addAttribute("create", true);
         return "groups/form";
     }
 

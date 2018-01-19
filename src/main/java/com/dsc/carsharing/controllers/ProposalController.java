@@ -6,7 +6,6 @@ import com.dsc.carsharing.model.Proposal;
 import com.dsc.carsharing.repositories.ExcursionRepository;
 import com.dsc.carsharing.repositories.ParentRepository;
 import com.dsc.carsharing.repositories.ProposalRepository;
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,19 +35,6 @@ public class ProposalController {
         return "proposals/list";
     }
 
-    @GetMapping("new")
-    public String create(Model model, Model m) {
-        List<Excursion> excursions= excursionRepository.findAll();
-        model.addAttribute("proposal", new Proposal());
-        m.addAttribute("excursions", excursions);
-        return "proposals/form";
-    }
-
-    @GetMapping("newCar")
-    public String createCar(Model model) {
-        model.addAttribute("proposal", new Proposal());
-        return "redirect:/cars";
-    }
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model) {
         Proposal proposal = proposalRepository.findOne(id);
@@ -56,21 +42,24 @@ public class ProposalController {
         return "proposals/form";
     }
 
+    @GetMapping("create")
+    public String create(Model model, Principal principal) {
+        List<Excursion> excursions = excursionRepository.findAll();
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        model.addAttribute("excursions", excursions);
+        model.addAttribute("cars", parent.getCars());
+        model.addAttribute("proposal", new Proposal());
+        model.addAttribute("create", true);
+        return "proposals/form";
+    }
+
     @PostMapping("save")
     public String save(Proposal proposal, Principal principal) {
-        //System.out.println(proposal.getExcursion().getDestination());
-        Excursion excursion = excursionRepository.findByDestination(proposal.getExcursion().getDestination());
         Parent parent = parentRepository.findByUsername(principal.getName());
-        proposal.setExcursion(excursion);
-        /*if (parent.getCar() == null){
-            return "redirect:/cars";
-        }
-        */
         proposal.setParent(parent);
         proposalRepository.save(proposal);
         return "redirect:/proposals";
     }
-
 
 
 }

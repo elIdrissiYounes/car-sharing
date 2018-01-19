@@ -28,4 +28,7 @@ public class Proposal {
 
     private Date departureTime;
 
+    @ManyToOne
+    private Car car;
+
 }

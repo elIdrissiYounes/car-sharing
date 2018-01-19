@@ -8,15 +8,9 @@
 <div th:replace="fragments/header :: menu"></div>
 
 <div class="container">
-    <div class="list-controls" sec:authorize="hasAnyAuthority('ADMIN','User','PARENT')">
-        <a th:href="@{/proposals/new}" class="btn btn-primary">
+    <div class="list-controls" sec:authorize="hasAnyAuthority('PARENT')">
+        <a th:href="@{/proposals/create}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"></span>
-        </a>
-    </div>
-    <div class="list-controls" sec:authorize="hasAnyAuthority('ADMIN','User','PARENT')">
-        <a th:href="@{/proposals/newCar}" class="btn btn-primary">
-            <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.new}"></span>
-            car
         </a>
     </div>
     <div class="table-responsive">
@@ -24,7 +18,7 @@
             <thead>
             <tr>
                 <th th:text="#{cc.rowNbr}"></th>
-                <th th:text="#{proposals.excursions}"></th>
+                <th th:text="#{proposals.excursion}"></th>
                 <th th:text="#{proposals.departurePlace}"></th>
                 <th th:text="#{proposals.car}"></th>
                 <th th:text="#{cc.actions}"></th>
@@ -36,10 +30,9 @@
                 <td th:text="${iter.index+1}">N/A</td>
                 <td th:text="${proposal.excursion.destination}"></td>
                 <td th:text="${proposal.departurePlace}">N/A</td>
-                <!--<td th:text="${proposal.parent.car[0].model}">N/A</td> -->
-                <td >N/A</td>
+                <td th:text="${proposal.car.model}">N/A</td>
                 <td class="actions-col">
-                    <span sec:authorize="hasAnyAuthority('ADMIN','PARENT','User')">
+                    <span sec:authorize="hasAnyAuthority('PARENT')">
                         <a th:href="@{/proposals/edit/__${proposal.id}__}" class="btn btn-primary">
                             <span class="glyphicon glyphicon-edit"></span> <span th:text="#{cc.edit}"></span>
                         </a>

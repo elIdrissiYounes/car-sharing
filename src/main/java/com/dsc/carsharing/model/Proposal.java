@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +27,7 @@ public class Proposal {
     private String departurePlace;
 
     @DateTimeFormat(pattern = "HH:mm")
+    @Temporal(TemporalType.TIME)
     private Date departureTime;
 
     @ManyToOne

@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,12 +21,12 @@ public class Children {
     private String lastName;
 
     @ManyToMany(mappedBy = "children")
-    private List<Parent> parents;
+    private Set<Parent> parents;
 
     @ManyToOne
     private Group group;
 
     public Children() {
-        parents = new ArrayList<>();
+        parents = new HashSet<>();
     }
 }

@@ -36,7 +36,13 @@ public class ProposalController {
     }
 
     @GetMapping("edit/{id}")
-    public String edit(@PathVariable Long id, Model model) {
+    public String edit(@PathVariable Long id, Model model, Principal principal) {
+        List<Excursion> excursions = excursionRepository.findAll();
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        // TODO: Show just his/her children groups excursions
+        // TODO: Indicate what children are already in the car, his at least
+        model.addAttribute("excursions", excursions);
+        model.addAttribute("cars", parent.getCars());
         Proposal proposal = proposalRepository.findOne(id);
         model.addAttribute("proposal", proposal);
         return "proposals/form";

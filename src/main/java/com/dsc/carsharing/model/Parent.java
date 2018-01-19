@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,7 +21,7 @@ public class Parent extends User {
             joinColumns = @JoinColumn(name = "parent_id"),
             inverseJoinColumns = @JoinColumn(name = "children_id")
     )
-    private List<Children> children;
+    private Set<Children> children;
 
     @OneToMany(mappedBy = "parent")
     private List<Car> cars;

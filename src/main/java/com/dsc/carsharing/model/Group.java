@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,6 +19,6 @@ public class Group {
     private String name;
 
     @ManyToMany(mappedBy = "groups")
-    private List<Excursion> excursions;
+    private Set<Excursion> excursions;
 
 }

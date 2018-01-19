@@ -2,12 +2,13 @@ package com.dsc.carsharing.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -26,9 +27,21 @@ public class Proposal {
 
     private String departurePlace;
 
+    @DateTimeFormat(pattern = "HH:mm")
     private Date departureTime;
 
     @ManyToOne
     private Car car;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "proposal_children",
+            joinColumns = @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "children_id")
+    )
+    private Set<Children> children;
+
+    public Proposal() {
+        children = new HashSet<>();
+    }
 }

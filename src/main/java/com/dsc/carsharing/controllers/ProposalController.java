@@ -72,9 +72,23 @@ public class ProposalController {
     }
 
     @GetMapping("select/{id}")
-    public String selectProposal(@PathVariable Long id, Model model) {
-//        model.addAttribute("excursions", excursions);
+    public String selectProposal(@PathVariable Long id, Model model, Principal principal) {
+        Proposal proposal = proposalRepository.findOne(id);
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        model.addAttribute("proposal", proposal);
+        // TODO: Children that can be in the excursion
+        model.addAttribute("children", parent.getChildren());
         return "proposals/select";
+    }
+
+    @PostMapping("select/save")
+    public String selectProposal(Proposal proposal, Principal principal) {
+        Proposal modified = proposalRepository.findOne(proposal.getId());
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        modified.getChildren().removeAll(parent.getChildren());
+        modified.getChildren().addAll(proposal.getChildren());
+        proposalRepository.save(modified);
+        return "redirect:/proposals/proposals";
     }
 
 }

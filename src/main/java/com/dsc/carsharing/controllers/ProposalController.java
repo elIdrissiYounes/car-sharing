@@ -1,11 +1,12 @@
 package com.dsc.carsharing.controllers;
 
+import com.dsc.carsharing.model.Children;
 import com.dsc.carsharing.model.Excursion;
 import com.dsc.carsharing.model.Parent;
 import com.dsc.carsharing.model.Proposal;
-import com.dsc.carsharing.repositories.ExcursionRepository;
 import com.dsc.carsharing.repositories.ParentRepository;
 import com.dsc.carsharing.repositories.ProposalRepository;
+import com.dsc.carsharing.service.ProposalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +24,12 @@ public class ProposalController {
 
     @Autowired
     private ProposalRepository proposalRepository;
-    @Autowired
-    private ExcursionRepository excursionRepository;
+
     @Autowired
     private ParentRepository parentRepository;
+
+    @Autowired
+    private ProposalService proposalService;
 
     @GetMapping
     public String list(Model model) {
@@ -37,32 +40,31 @@ public class ProposalController {
 
     @GetMapping("edit/{id}")
     public String edit(@PathVariable Long id, Model model, Principal principal) {
-        List<Excursion> excursions = excursionRepository.findAll();
+        Proposal proposal = proposalRepository.findOne(id);
         Parent parent = parentRepository.findByUsername(principal.getName());
-        // TODO: Show just his/her children groups excursions
-        // TODO: Indicate what children are already in the car, his at least
+        List<Excursion> excursions = proposalService.findAvailableExcursionsForChildren(principal.getName());
+        model.addAttribute("proposal", proposal);
         model.addAttribute("excursions", excursions);
         model.addAttribute("cars", parent.getCars());
-        Proposal proposal = proposalRepository.findOne(id);
-        model.addAttribute("proposal", proposal);
         return "proposals/form";
     }
 
     @GetMapping("create")
     public String create(Model model, Principal principal) {
-        List<Excursion> excursions = excursionRepository.findAll();
         Parent parent = parentRepository.findByUsername(principal.getName());
-        // TODO: Show just his/her children groups excursions
+        List<Excursion> excursions = proposalService.findAvailableExcursionsForChildren(principal.getName());
+//        List<Children> children = proposalService.findChildrenForExcursion(parent.getId());
         // TODO: Indicate what children are already in the car, his at least
+        model.addAttribute("proposal", new Proposal());
         model.addAttribute("excursions", excursions);
         model.addAttribute("cars", parent.getCars());
-        model.addAttribute("proposal", new Proposal());
         model.addAttribute("create", true);
         return "proposals/form";
     }
 
     @PostMapping("save")
     public String save(Proposal proposal, Principal principal) {
+        // TODO: Show children can join the excursion
         Parent parent = parentRepository.findByUsername(principal.getName());
         proposal.setParent(parent);
         proposalRepository.save(proposal);
@@ -70,9 +72,8 @@ public class ProposalController {
     }
 
     @GetMapping("proposals")
-    public String showProposals(Model model) {
-        // TODO: Excursions of his children
-        List<Excursion> excursions = excursionRepository.findAll();
+    public String showProposals(Model model, Principal principal) {
+        List<Excursion> excursions = proposalService.findAvailableExcursionsForChildren(principal.getName());
         model.addAttribute("excursions", excursions);
         return "proposals/proposals";
     }

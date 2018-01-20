@@ -26,8 +26,8 @@ public class CarController {
     private ParentRepository parentRepository;
 
     @GetMapping
-    public String list(Model model) {
-        List<Car> cars = carRepository.findAll();
+    public String list(Model model, Principal principal) {
+        List<Car> cars = carRepository.findByParentUsername(principal.getName());
         model.addAttribute("cars", cars);
         return "cars/list";
     }

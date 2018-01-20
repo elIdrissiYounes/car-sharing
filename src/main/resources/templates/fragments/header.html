@@ -40,15 +40,8 @@
                     <li sec:authorize="hasAnyAuthority('PARENT')">
                         <a th:href="@{/cars}" th:text="#{cars.title}"></a>
                     </li>
-                    <li sec:authorize="hasAnyAuthority('PARENT')" class="dropdown">
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span th:text="#{proposals.title}"></span> <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/proposals}" th:text="#{proposals.manage}"></a></li>
-                            <li><a th:href="@{/proposals/proposals}" th:text="#{proposals.select}"></a></li>
-                        </ul>
+                    <li sec:authorize="hasAnyAuthority('PARENT')">
+                        <a th:href="@{/proposals}" th:text="#{proposals.title}"></a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

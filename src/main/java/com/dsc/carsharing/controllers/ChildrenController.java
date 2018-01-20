@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -31,8 +32,9 @@ public class ChildrenController {
     private GroupRepository groupRepository;
 
     @GetMapping
-    public String list(Model model) {
-        List<Children> children = childrenRepository.findAll();
+    public String list(Model model, Principal principal) {
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        List<Children> children = childrenRepository.findByParentsIn(Collections.singletonList(parent));
         model.addAttribute("children", children);
         return "children/list";
     }

@@ -3,6 +3,7 @@ package com.dsc.carsharing.controllers;
 import com.dsc.carsharing.model.Parent;
 import com.dsc.carsharing.repositories.ParentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,9 @@ public class ParentController {
 
     @Autowired
     private ParentRepository parentRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     @GetMapping
     public String list(Model model) {
@@ -42,6 +46,7 @@ public class ParentController {
 
     @PostMapping("save")
     public String save(Parent parent) {
+        parent.setPassword(encoder.encode(parent.getPassword()));
         parentRepository.save(parent);
         return "redirect:/parents";
     }

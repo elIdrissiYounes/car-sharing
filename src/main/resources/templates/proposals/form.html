@@ -52,9 +52,9 @@
                 </div>
                 <div class="form-group">
                     <label for="children" class="col-sm-2 control-label" th:text="#{proposals.children}"></label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" th:with="originalSize = ${proposal.children.size()}">
                         <select multiple="multiple" id="children" class="form-control" th:field="*{children}"
-                                th:onchange="'checkSeats(' + *{car.seats - children.size()} + ', ' + *{children.size()} + ')'">
+                                th:onchange="'checkSeats(' + *{car.seats} + ', ' + ${originalSize} + ')'">
                             <option th:each="child : ${children}" th:value="${child.id}"
                                     th:text="${child.firstName}">
                             </option>
@@ -73,18 +73,23 @@
 </div>
 
 <script type="text/javascript">
-    function checkSeats(availableSeats, initialSelected) {
-        console.log(availableSeats);
-        console.log(initialSelected);
+    var previouslySelected = [];
+
+    function getSelected() {
+        previouslySelected = $('#children [selected]');
+    }
+
+    function checkSeats(availableSeats, selected) {
+        var allMinusHis = Math.abs(selected - previouslySelected.length);
         var selectedChildren = $('#children').val();
-        console.log(selectedChildren.length);
-        if (availableSeats >= selectedChildren.length) {
+        if (availableSeats >= allMinusHis + selectedChildren.length) {
             $('#save').removeAttr('disabled');
         } else {
             $('#save').attr('disabled', 'disabled');
         }
-
     }
+
+    getSelected();
 </script>
 
 <div th:replace="fragments/footer :: footer"></div>

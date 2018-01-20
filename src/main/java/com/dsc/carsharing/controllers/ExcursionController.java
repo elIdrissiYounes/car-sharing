@@ -2,6 +2,7 @@ package com.dsc.carsharing.controllers;
 
 import com.dsc.carsharing.model.Excursion;
 import com.dsc.carsharing.repositories.ExcursionRepository;
+import com.dsc.carsharing.repositories.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class ExcursionController {
     @Autowired
     private ExcursionRepository excursionRepository;
 
+    @Autowired
+    private GroupRepository groupRepository;
+
     @GetMapping
     public String list(Model model) {
         List<Excursion> excursions = excursionRepository.findAll();
@@ -30,13 +34,14 @@ public class ExcursionController {
     public String edit(@PathVariable Long id, Model model) {
         Excursion excursion = excursionRepository.findOne(id);
         model.addAttribute("excursion", excursion);
+        model.addAttribute("groups", groupRepository.findAll());
         return "excursions/form";
     }
 
     @GetMapping("new")
     public String create(Model model) {
         model.addAttribute("excursion", new Excursion());
-        // TODO: Add groups to excursions during creation
+        model.addAttribute("groups", groupRepository.findAll());
         return "excursions/form";
     }
 

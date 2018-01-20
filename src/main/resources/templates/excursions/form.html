@@ -16,29 +16,40 @@
                 <input type="hidden" th:field="*{id}"/>
                 <div class="form-group">
                     <label for="destination" class="col-sm-2 control-label"
-                           th:text="#{excursions.destination}">:</label>
+                           th:text="#{excursions.destination}"></label>
                     <div class="col-sm-10">
                         <input id="destination" class="form-control" th:field="*{destination}" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="startDate" class="col-sm-2 control-label" th:text="#{excursions.startDate}"> :</label>
+                    <label for="startDate" class="col-sm-2 control-label" th:text="#{excursions.startDate}"></label>
                     <div class="col-sm-10">
-                        <input id="startDate" type="date" class="form-control" th:field="*{startDate}" required="required"/>
+                        <input id="startDate" type="date" class="form-control" th:field="*{startDate}"
+                               required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="endDate" class="col-sm-2 control-label" th:text="#{excursions.endDate}"> :</label>
+                    <label for="endDate" class="col-sm-2 control-label" th:text="#{excursions.endDate}"></label>
                     <div class="col-sm-10">
                         <input id="endDate" type="date" class="form-control" th:field="*{endDate}" required="required"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="description" class="col-sm-2 control-label"
-                           th:text="#{excursions.description}">:</label>
+                           th:text="#{excursions.description}"></label>
                     <div class="col-sm-10">
                         <textarea id="description" class="form-control" th:field="*{description}" required="required">
                         </textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="groups" class="col-sm-2 control-label" th:text="#{excursions.groups}"></label>
+                    <div class="col-sm-10">
+                        <select multiple="multiple" id="groups" class="form-control" th:field="*{groups}">
+                            <option th:each="group : ${groups}" th:value="${group.id}"
+                                    th:text="${group.name}">
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">

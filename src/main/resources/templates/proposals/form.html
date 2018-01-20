@@ -54,21 +54,38 @@
                     <label for="children" class="col-sm-2 control-label" th:text="#{proposals.children}"></label>
                     <div class="col-sm-10">
                         <select multiple="multiple" id="children" class="form-control" th:field="*{children}"
-                                required="required">
+                                th:onchange="'checkSeats(' + *{car.seats - children.size()} + ', ' + *{children.size()} + ')'">
                             <option th:each="child : ${children}" th:value="${child.id}"
-                                    th:text="${child.firstName}" selected="selected"></option>
+                                    th:text="${child.firstName}">
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <input type="submit" class="btn btn-default" th:value="#{cc.save}"/>
+                        <input id="save" type="submit" class="btn btn-default" th:value="#{cc.save}"
+                               th:disabled="*{(car.seats &lt; children.size())}"/>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function checkSeats(availableSeats, initialSelected) {
+        console.log(availableSeats);
+        console.log(initialSelected);
+        var selectedChildren = $('#children').val();
+        console.log(selectedChildren.length);
+        if (availableSeats >= selectedChildren.length) {
+            $('#save').removeAttr('disabled');
+        } else {
+            $('#save').attr('disabled', 'disabled');
+        }
+
+    }
+</script>
 
 <div th:replace="fragments/footer :: footer"></div>
 

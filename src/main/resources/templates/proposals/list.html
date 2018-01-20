@@ -37,7 +37,7 @@
                         <td th:text="${proposal.departurePlace}">N/A</td>
                         <td th:text="${#dates.format(proposal.departureTime, #messages.msg('cc.format.time'))}">N/A</td>
                         <td th:text="${proposal.car.model}">N/A</td>
-                        <td th:text="${proposal.car.seats}">N/A</td>
+                        <td th:text="${proposal.car.seats - proposal.children.size()}">N/A</td>
                         <td class="actions-col">
                             <span sec:authorize="hasAnyAuthority('PARENT')">
                                 <a th:href="@{/proposals/select/__${proposal.id}__}" class="btn btn-primary">

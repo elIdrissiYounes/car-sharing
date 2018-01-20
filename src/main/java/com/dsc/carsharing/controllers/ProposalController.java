@@ -66,6 +66,7 @@ public class ProposalController {
     public String selectProposal(@PathVariable Long id, Model model, Principal principal) {
         Proposal proposal = proposalRepository.findOne(id);
         Parent parent = parentRepository.findByUsername(principal.getName());
+//        parent.getChildren().addAll(proposal.getChildren());
         model.addAttribute("proposal", proposal);
         model.addAttribute("children", parent.getChildren());
         model.addAttribute("cars", Collections.singletonList(proposal.getCar()));
@@ -74,9 +75,12 @@ public class ProposalController {
     }
 
     @PostMapping("save")
-    public String save(Proposal proposal) {
-        proposal.setParent(parentRepository.findOne(proposal.getParent().getId()));
-        proposalRepository.save(proposal);
+    public String save(Proposal proposal, Principal principal) {
+        Proposal old = proposalRepository.findOne(proposal.getId());
+        Parent parent = parentRepository.findByUsername(principal.getName());
+        old.getChildren().removeAll(parent.getChildren());
+        old.getChildren().addAll(proposal.getChildren());
+        proposalRepository.save(old);
         return "redirect:/proposals";
     }
 

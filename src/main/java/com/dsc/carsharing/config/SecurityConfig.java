@@ -30,12 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers("/", "/img/**", "/v2/api-docs", "/swagger-resources", "/swagger-resources/**", "/swagger-ui.html").permitAll()
-//                .antMatchers("/groups/**")
-//                .hasAnyAuthority("ADMIN", "PARENT")
-
-//                .anyRequest().authenticated()
-                .anyRequest().permitAll()
+                .antMatchers("/", "/img/**").permitAll()
+                .antMatchers("/parents/**", "/groups/**", "/excursions/**")
+                .hasAnyAuthority("ADMIN")
+                .antMatchers("/children/**", "/cars/**", "/proposals/**")
+                .hasAnyAuthority("PARENT")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()

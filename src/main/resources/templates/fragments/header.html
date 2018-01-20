@@ -44,8 +44,8 @@
                         <a th:href="@{/proposals}" th:text="#{proposals.title}"></a>
                     </li>
                     <li sec:authorize="hasAnyAuthority('ADMIN')">
-                        <a href="/statistics">Statiscis</a>
-                    </li> 
+                        <a th:href="@{/statistics}">Statistics</a>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" th:text="#{cc.login}"></a></li>

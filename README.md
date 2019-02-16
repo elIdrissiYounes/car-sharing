@@ -1,6 +1,6 @@
 Car Sharing
 ======
-Application for Car Sharing proposals.
+Application for Car Sharing proposals. (Spring Boot)
 
 ## Administrator
 - The administrator can create parent accounts, groups and excursions.
